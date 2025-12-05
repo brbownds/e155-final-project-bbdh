@@ -51,30 +51,30 @@
   {
     "objectID": "design.html",
     "href": "design.html",
-    "title": "New Hardware:",
+    "title": "Documentation",
     "section": "",
     "text": "(Communication protocols labeled, bus width)"
   },
   {
     "objectID": "design.html#system-block-diagram",
     "href": "design.html#system-block-diagram",
-    "title": "New Hardware:",
+    "title": "Documentation",
     "section": "",
     "text": "(Communication protocols labeled, bus width)"
   },
   {
     "objectID": "design.html#fpga-design",
     "href": "design.html#fpga-design",
-    "title": "New Hardware:",
+    "title": "Documentation",
     "section": "FPGA Design",
-    "text": "FPGA Design\n(RTL?)"
+    "text": "FPGA Design\nTo implement the FFT in hardware on the FPGA, the team started by understanding the DFT algorithm in depth and consulting the paper titled A Tutorial-style Single-cycle Fast Fourier Transform Processor by Alec and published by the HMC Dept. of Engineering.\nEach component of the FFT was designed in Lattice Radiant and adapted to be 512-point 32-bit resolution. After building each component starting from the butterfly unit up to the FFT master module, each script was verified for accuracy against testbenches. Simulations involved testing cosine, square, and static input signals, ensuring that each transformed output was correct.\nAfter the FFT was validated, the I2S module from the Lattice Radiant IP Block Catalogue was implemented in simulation. Since the INMP441 I2S microphone with a built-in ADC outputs 24-bit data but the FFT was configured for 32-bit resolution, sampled data was zero padded in the lower bits to achieve the required signal bit width. The FPGA system clock of 48MHz was divided down to 3MHz bck and 48kHz lrck output signals that were sent to the INMP441 to operationalize it.\nTo interface with the MCU, the SPI communication protocol was initialized at the end of the FPGA data pipeline. The FPGA output on the SDO line was sent serially to the MCU.\n(RTL?)"
   },
   {
     "objectID": "design.html#mcu-design",
     "href": "design.html#mcu-design",
-    "title": "New Hardware:",
+    "title": "Documentation",
     "section": "MCU Design",
-    "text": "MCU Design"
+    "text": "MCU Design\nThe STM32L432KC microcontroller serves as the control and interpretation layer for an FPGA-based 512-point FFT audio tuner. The FPGA performs all real-time audio sampling and FFT computation, then signals the MCU through a DONE pin when a complete frame is ready. The MCU, acting as an SPI master, asserts chip-select, cs and clocks in all 512 complex FFT bins over an 8-bit receive-only SPI link, ignoring MOSI while using MISO to collect the FPGA’s streamed FFT output. Once the frame is received, the MCU computes the magnitude of each bin, identifies the dominant frequency using the 16 kHz sampling rate and 31.25 Hz bin resolution, and converts that frequency into a musical note using a flat-only chromatic scale (A, Bb, B, C, Db, etc.) along with a logarithmic cents-deviation calculation. These results—frequency, note name, and cents offset—are displayed on a 16×2 HD44780 LCD driven in 4-bit mode using dedicated GPIO lines (RS, EN, D4–D7). After updating the display, the MCU pulses a RST line to instruct the FPGA to begin processing the next audio frame. This architecture cleanly partitions heavy DSP work to the FPGA while the MCU handles control, interpretation, and user feedback."
   },
   {
     "objectID": "index.html",
@@ -88,7 +88,7 @@
     "href": "index.html#project-abstract",
     "title": "Project Overview",
     "section": "Project Abstract",
-    "text": "Project Abstract\nThe Bit-by-Bit Tuner project leverages the Upduino v3.1 FPGA and STM32L432KC MCU hardware provided in E155 to create an instrument tuner that takes in sound on a microphone and displays the note name, pitch in Hz, and pitch deviation on an LCD screen. To build the project, the Fast Fourier Transform (FFT) for 512-point 32-bit resolution was implement on the FPGA by applying the Discrete Fourier Transform (DFT) algorithm. The FFT bins containing real and complex coefficients of the transformed input signal in the frequency domain were sent to the MCU which handled identifying dominant frequency and displaying pitch information on the LCD screen. While the full system design does not currently output accurate pitch measurements, the FFT dataflow was fully verified in simulation and data can be communicated from the FPGA to the MCU."
+    "text": "Project Abstract\nThe Bit-by-Bit Tuner project leverages the Upduino v3.1 FPGA and STM32L432KC MCU hardware provided in E155 to create an instrument tuner that takes in sound on a microphone and displays the note name, pitch in Hz, and pitch deviation on an LCD screen. To build the project, the Fast Fourier Transform (FFT) for 512-point 32-bit resolution was implemented on the FPGA by applying the Discrete Fourier Transform (DFT) algorithm. The FFT bins containing real and complex coefficients of the transformed input signal in the frequency domain were sent to the MCU which handled identifying dominant frequency and displaying pitch information on the LCD screen. While the full system design does not currently output accurate pitch measurements, the FFT dataflow was fully verified in simulation and data can be communicated from the FPGA to the MCU."
   },
   {
     "objectID": "index.html#project-motivation",
