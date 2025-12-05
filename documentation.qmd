@@ -21,5 +21,11 @@ Repository Link:
 
 # References:
 
+[1] Vercruysse, Alec, et al. “A Tutorial-style Single-cycle Fast Fourier Transform Processor.” Proceedings of the Great Lakes Symposium on VLSI (GLSVLSI 2022), ACM, 2022, pp. 525–530. 
+
+[2] G. William Slade. 2013. The Fast Fourier Transform in Hardware: A Tutorial Based on an FPGA Implementation. (2013), 26 pages. Retrieved April 8, 2022 from https://www.researchgate.net/publication/235995761_The_Fast_Fourier_ Transform_in_Hardware_A_Tutorial_Based_on_an_FPGA_Implementation
 
 # Acknowledgements:
+
+Thank you to Prof. Spencer for sharing helpful resources and literature in starting the project. Thank you to Leilani E. for sharing her snacks in the ECF. 
+

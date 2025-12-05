@@ -1,24 +1,35 @@
+---
+title: "Documentation"
+---
+
 ## System Block Diagram:
+
 
 (Communication protocols labeled, bus width)
 
+
 ## FPGA Design
 
-To implement the FFT in hardware on the FPGA, the team started by understanding the DFT algorithm in depth and consulting the paper titled A Tutorial-style Single-cycle Fast Fourier Transform Processor by Alec and published by the HMC Dept. of Engineering. 
+To implement the FFT in hardware on the FPGA, the team started by understanding the DFT algorithm in depth and consulting the paper titled A Tutorial-style Single-cycle Fast Fourier Transform Processor by Alec and published by the HMC Dept. of Engineering.
 
-Each component of the FFT was designed in Lattice Radiant and adapted to be 512-point 32-bit resolution. After building each component starting from the butterfly unit up to the FFT master module, each script was verified for accuracy against testbenches. Simulations involved testing cosine, square, and static input signals, ensuring that each transformed output was correct. 
+Each component of the FFT was designed in Lattice Radiant and adapted to be 512-point 32-bit resolution. After building each component starting from the butterfly unit up to the FFT master module, each script was verified for accuracy against testbenches. Simulations involved testing cosine, square, and static input signals, ensuring that each transformed output was correct.
 
-After the FFT was validated, the I2S module from the Lattice Radiant IP Block Catalogue was implemented in simulation. Since the INMP441 I2S microphone with a built-in ADC outputs 24-bit data but the FFT was configured for 32-bit resolution, sampled data was zero padded in the lower bits to achieve the required signal bit width. The FPGA system clock of 48MHz was divided down to 3MHz bck and 48kHz lrck output signals that were sent to the INMP441 to operationalize it. 
+After the FFT was validated, the I2S module from the Lattice Radiant IP Block Catalogue was implemented in simulation. Since the INMP441 I2S microphone with a built-in ADC outputs 24-bit data but the FFT was configured for 32-bit resolution, sampled data was zero padded in the lower bits to achieve the required signal bit width. The FPGA system clock of 48MHz was divided down to 3MHz bck and 48kHz lrck output signals that were sent to the INMP441 to operationalize it.
 
 To interface with the MCU, the SPI communication protocol was initialized at the end of the FPGA data pipeline. The FPGA output on the SDO line was sent serially to the MCU.
+
+
+(RTL?)
+
 
 # New Hardware:
 
 The primary new hardware component introduced in this project was the INMP441 digital I2S microphone, which represented a significant step beyond the SPI- and USART-based digital interfaces used previously in E155. Unlike these general-purpose serial protocols, I²S is purpose-built for continuous, real-time audio acquisition, enforcing strict timing relationships between its bit clock (BCLK), left/right frame clock (LRCLK or WS), and serial data (SD) lines. These timing constraints required additional RTL modules and careful clock generation within the FPGA to ensure reliable audio sampling.
 
+
 ## MCU Design
 
-
+The STM32L432KC microcontroller serves as the control and interpretation layer for an FPGA-based 512-point FFT audio tuner. The FPGA performs all real-time audio sampling and FFT computation, then signals the MCU through a DONE pin when a complete frame is ready. The MCU, acting as an SPI master, asserts chip-select, `cs` and clocks in all 512 complex FFT bins over an 8-bit receive-only SPI link, ignoring MOSI while using MISO to collect the FPGA’s streamed FFT output. Once the frame is received, the MCU computes the magnitude of each bin, identifies the dominant frequency using the 16 kHz sampling rate and 31.25 Hz bin resolution, and converts that frequency into a musical note using a flat-only chromatic scale (A, Bb, B, C, Db, etc.) along with a logarithmic cents-deviation calculation. These results—frequency, note name, and cents offset—are displayed on a 16×2 HD44780 LCD driven in 4-bit mode using dedicated GPIO lines (`RS`, `EN`, `D4–D7`). After updating the display, the MCU pulses a `RST` line to instruct the FPGA to begin processing the next audio frame. This architecture cleanly partitions heavy DSP work to the FPGA while the MCU handles control, interpretation, and user feedback.
 
 # New Hardware:
 
