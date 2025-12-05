@@ -1,7 +1,15 @@
 ---
-title: "e155-final-project-bbdh"
+title: "Project Overview"
+author: "Broderick Bownds & Sebastian Heredia"
 ---
 
-This is a Quarto website.
+[Insert Images (& Video?)]
 
-To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
+## Project Abstract
+The 
+
+## Project Motivation:
+
+## System Block Diagram:
+
+(Communication protocols labeled, bus width)

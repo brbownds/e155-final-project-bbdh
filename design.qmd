@@ -1,0 +1,19 @@
+## System Block Diagram:
+
+(Communication protocols labeled, bus width)
+
+## FPGA Design
+
+(RTL?)
+
+# New Hardware:
+
+New hardware described with notes about the features to be implemented and how they go beyond the previous material covered in the course.
+
+
+## MCU Design
+
+# New Hardware:
+
+New hardware described with notes about the features to be implemented and how they go beyond the previous material covered in the course.
+

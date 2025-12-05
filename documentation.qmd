@@ -1,0 +1,25 @@
+## Schematic:
+(KiCAD)
+
+Repository Link:
+
+## FPGA Code:
+
+
+
+## MCU Code:
+
+
+## Results:
+
+
+
+
+## Bill of Materials:
+
+
+
+# References:
+
+
+# Acknowledgements:
