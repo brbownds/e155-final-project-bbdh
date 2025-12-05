@@ -1,16 +1,107 @@
 [
   {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
+    "objectID": "resources.html",
+    "href": "resources.html",
+    "title": "About the Team",
     "section": "",
-    "text": "About this site"
+    "text": "Broderick Bownds\nBroderick is a third year Engineering Major\nWebsite / LinkedIn Link:\nSebastian Heredia\nSebastian is a ______\nWebsite / LinkedIn Link:"
+  },
+  {
+    "objectID": "documentation.html",
+    "href": "documentation.html",
+    "title": "References:",
+    "section": "",
+    "text": "(KiCAD)\nRepository Link:"
+  },
+  {
+    "objectID": "documentation.html#schematic",
+    "href": "documentation.html#schematic",
+    "title": "References:",
+    "section": "",
+    "text": "(KiCAD)\nRepository Link:"
+  },
+  {
+    "objectID": "documentation.html#fpga-code",
+    "href": "documentation.html#fpga-code",
+    "title": "References:",
+    "section": "FPGA Code:",
+    "text": "FPGA Code:"
+  },
+  {
+    "objectID": "documentation.html#mcu-code",
+    "href": "documentation.html#mcu-code",
+    "title": "References:",
+    "section": "MCU Code:",
+    "text": "MCU Code:"
+  },
+  {
+    "objectID": "documentation.html#results",
+    "href": "documentation.html#results",
+    "title": "References:",
+    "section": "Results:",
+    "text": "Results:"
+  },
+  {
+    "objectID": "documentation.html#bill-of-materials",
+    "href": "documentation.html#bill-of-materials",
+    "title": "References:",
+    "section": "Bill of Materials:",
+    "text": "Bill of Materials:"
+  },
+  {
+    "objectID": "design.html",
+    "href": "design.html",
+    "title": "New Hardware:",
+    "section": "",
+    "text": "(Communication protocols labeled, bus width)"
+  },
+  {
+    "objectID": "design.html#system-block-diagram",
+    "href": "design.html#system-block-diagram",
+    "title": "New Hardware:",
+    "section": "",
+    "text": "(Communication protocols labeled, bus width)"
+  },
+  {
+    "objectID": "design.html#fpga-design",
+    "href": "design.html#fpga-design",
+    "title": "New Hardware:",
+    "section": "FPGA Design",
+    "text": "FPGA Design\n(RTL?)"
+  },
+  {
+    "objectID": "design.html#mcu-design",
+    "href": "design.html#mcu-design",
+    "title": "New Hardware:",
+    "section": "MCU Design",
+    "text": "MCU Design"
   },
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "e155-final-project-bbdh",
+    "title": "Project Overview",
     "section": "",
-    "text": "This is a Quarto website.\nTo learn more about Quarto websites visit https://quarto.org/docs/websites."
+    "text": "[Insert Images (& Video?)]"
+  },
+  {
+    "objectID": "index.html#project-abstract",
+    "href": "index.html#project-abstract",
+    "title": "Project Overview",
+    "section": "Project Abstract",
+    "text": "Project Abstract\nThe"
+  },
+  {
+    "objectID": "index.html#project-motivation",
+    "href": "index.html#project-motivation",
+    "title": "Project Overview",
+    "section": "Project Motivation:",
+    "text": "Project Motivation:"
+  },
+  {
+    "objectID": "index.html#system-block-diagram",
+    "href": "index.html#system-block-diagram",
+    "title": "Project Overview",
+    "section": "System Block Diagram:",
+    "text": "System Block Diagram:\n(Communication protocols labeled, bus width)"
   }
 ]
