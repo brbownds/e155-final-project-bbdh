@@ -4,16 +4,22 @@
 
 ## FPGA Design
 
-(RTL?)
+To implement the FFT in hardware on the FPGA, the team started by understanding the DFT algorithm in depth and consulting the paper titled A Tutorial-style Single-cycle Fast Fourier Transform Processor by Alec and published by the HMC Dept. of Engineering. 
+
+Each component of the FFT was designed in Lattice Radiant and adapted to be 512-point 32-bit resolution. After building each component starting from the butterfly unit up to the FFT master module, each script was verified for accuracy against testbenches. Simulations involved testing cosine, square, and static input signals, ensuring that each transformed output was correct. 
+
+After the FFT was validated, the I2S module from the Lattice Radiant IP Block Catalogue was implemented in simulation. Since the INMP441 I2S microphone with a built-in ADC outputs 24-bit data but the FFT was configured for 32-bit resolution, sampled data was zero padded in the lower bits to achieve the required signal bit width. The FPGA system clock of 48MHz was divided down to 3MHz bck and 48kHz lrck output signals that were sent to the INMP441 to operationalize it. 
+
+To interface with the MCU, the SPI communication protocol was initialized at the end of the FPGA data pipeline. The FPGA output on the SDO line was sent serially to the MCU.
 
 # New Hardware:
 
-New hardware described with notes about the features to be implemented and how they go beyond the previous material covered in the course.
-
+The primary new hardware component introduced in this project was the INMP441 digital I2S microphone, which represented a significant step beyond the SPI- and USART-based digital interfaces used previously in E155. Unlike these general-purpose serial protocols, I²S is purpose-built for continuous, real-time audio acquisition, enforcing strict timing relationships between its bit clock (BCLK), left/right frame clock (LRCLK or WS), and serial data (SD) lines. These timing constraints required additional RTL modules and careful clock generation within the FPGA to ensure reliable audio sampling.
 
 ## MCU Design
 
+
+
 # New Hardware:
 
-New hardware described with notes about the features to be implemented and how they go beyond the previous material covered in the course.
-
+The new hardware interfaced with the MCU was the CFAH2002A-TMI-JT LCD screen. While in E155 simple 7-segment displays were explored in depth on the FPGA, LCD screens are far more complex in they are driven as well as their capabilities to control backlight, refresh timing, and command hundreds of pixels.To interface with the MCU, the LCD was driven using the SPI protocol, allowing commands and character data to be transmitted efficiently over a serial link rather than dedicating multiple GPIO lines for direct segment control.
