@@ -1,13 +1,13 @@
 ---
 title: "Project Overview"
-author: "Broderick Bownds & Sebastian Heredia"
+authors: "Broderick Bownds & Sebastian Heredia"
 ---
 
 [Insert Images (& Video?)]
 
 ## Project Abstract
 
-The Bit-by-Bit Tuner project leverages the Upduino v3.1 FPGA and STM32L432KC MCU hardware provided in E155 to create an instrument tuner that takes in sound on a microphone and displays the note name, pitch in Hz, and pitch deviation on an LCD screen. To build the project, the Fast Fourier Transform (FFT) for 512-point 32-bit resolution was implement on the FPGA by applying the Discrete Fourier Transform (DFT) algorithm. The FFT bins containing real and complex coefficients of the transformed input signal in the frequency domain were sent to the MCU which handled identifying dominant frequency and displaying pitch information on the LCD screen. While the full system design does not currently output accurate pitch measurements, the FFT dataflow was fully verified in simulation and data can be communicated from the FPGA to the MCU.
+The Bit-by-Bit Tuner project leverages the [Upduino v3.1 FPGA](https://hmc-e155.github.io/assets/doc/FPGA-DS-02008-2-0-iCE40-UltraPlus-Family-Data-Sheet.pdf) and [STM32L432KC MCU](https://hmc-e155.github.io/assets/doc/ds11451-stm32l432kc.pdf) hardware provided in E155 to create an instrument tuner that takes in sound on a microphone and displays the note name, pitch in Hz, and pitch deviation on an LCD screen. To build the project, the Fast Fourier Transform (FFT) for 512-point 32-bit resolution was implement on the FPGA by applying the Discrete Fourier Transform (DFT) algorithm. The FFT bins containing real and complex coefficients of the transformed input signal in the frequency domain were sent to the MCU which handled identifying dominant frequency and displaying pitch information on the LCD screen. While the full system design does not currently output accurate pitch measurements, the FFT dataflow was fully verified in simulation and data can be communicated from the FPGA to the MCU.
 
 ## Project Motivation:
 
