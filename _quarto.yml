@@ -9,8 +9,8 @@ website:
         text: Design
       - href: documentation.qmd
         text: Documentation
-      - href: resources.qmd
-        text: About
+      - href: about.qmd
+        text: "About"
 
 format:
   html:

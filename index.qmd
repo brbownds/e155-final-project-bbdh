@@ -3,7 +3,7 @@ title: "Project Overview"
 authors: "Broderick Bownds & Sebastian Heredia"
 ---
 
-[Insert Images (& Video?)]
+![](fft_tuner.png){width=700}
 
 ## Project Abstract
 
