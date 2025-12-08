@@ -11,8 +11,8 @@ The two riskiest elements and bottle necks for time for this project were implem
 
 Designing the FFT modules in SystemVerilog took 3-weeks to initially write up and an additional week to verify. For the team’s final check-off, the 512-point 16-bit fixed-point FFT on the FPGA was fully verified in simulation at the fft.sv module level. Figure 6 below shows how the outputs between python simulation and the team’s FFT match closely for the same discretized, ideal input cosine wave. Notably, in order to meet the LUT and I/O port requirements in Lattice Radiant for the iCE40 UP5K FPGA, an fft_master.sv module was created to house the bit and left-right select clock divider sub-modules.  ADD QUANTITATIVE RESULTS (Compare the `test_out.memh` file from hardware to software)
 
-(Simulation of fft_control.sv in Questa + Expected / Got values match)
-Figure 6: The python simulation matches the hardware FFT output values in simulation for the same ideal cosine wave input. 
+
+![Figure 6: The python simulation matches the hardware FFT output values in simulation for the same ideal cosine wave input.](fft_control.png){width=800}
 
 Since the MCU cannot be simulated with made-up data in Segger and the data pipeline for the project was stunted at the beginning by the microphone, the dominant frequency detection module, note LUT, and pitch deviation modules on the MCU were unable to be tested continuously. Therefore, the performance metric of update rate on the LCD was not able to be verified. Nevertheless, it was shown that the MCU was able to display from the note LUT as shown in figure 7 below. 
 
