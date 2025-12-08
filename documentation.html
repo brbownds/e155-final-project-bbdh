@@ -98,7 +98,7 @@ ul.task-list li input[type="checkbox"] {
 <span class="menu-text">Documentation</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./resources.html"> 
+    <a class="nav-link" href="./about.html"> 
 <span class="menu-text">About</span></a>
   </li>  
 </ul>
@@ -144,16 +144,27 @@ ul.task-list li input[type="checkbox"] {
 <section id="results" class="level2">
 <h2 class="anchored" data-anchor-id="results">Results:</h2>
 <p>The two riskiest elements and bottle necks for time for this project were implementing the FFT design on the FPGA and accurately reading input data from the I2S MEMs microphone. The FFT algorithm was successfully implemented in simulation, however, complications with the microphone prevented the project from advancing beyond simulation and into hardware.</p>
-<p>Designing the FFT modules in SystemVerilog took 3-weeks to initially write up and an additional week to verify. For the team’s final check-off, the 512-point 16-bit fixed-point FFT on the FPGA was fully verified in simulation at the fft.sv module level. Figure 6 below shows how the outputs between python simulation and the team’s FFT match closely for the same discretized, ideal input cosine wave. Notably, in order to meet the LUT and I/O port requirements in Lattice Radiant for the iCE40 UP5K FPGA, an fft_master.sv module was created to house the bit and left-right select clock divider sub-modules. ADD QUANTITATIVE RESULTS (Compare the <code>test_out.memh</code> file from hardware to software)</p>
+<p>Designing the FFT modules in SystemVerilog took 3-weeks to initially write up and an additional week to verify. For the team’s final check-off, the 512-point 16-bit fixed-point FFT on the FPGA was fully verified in simulation at the fft.sv module level. Figure 6 below shows how the outputs between python simulation and the team’s FFT match closely for the same discretized, ideal input cosine wave. Notably, in order to meet the LUT and I/O port requirements in Lattice Radiant for the iCE40 UP5K FPGA, an fft_master.sv module was created to house the bit and left-right select clock divider sub-modules.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="fft_control_tb.png" class="img-fluid figure-img" width="800"></p>
-<figcaption>Figure 6: The python simulation matches the hardware FFT output values in simulation for the same ideal cosine wave input.</figcaption>
+<figcaption>Figure 6a: The python simulation matches the hardware FFT output values in simulation for the same ideal cosine wave input.</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="expected_vs_got.png" class="img-fluid figure-img" width="800"></p>
+<figcaption>Figure 6b: The simulation shows the testbench display comparing all 512 outputs of the python output to the hardware FFT output within ~1% of error.</figcaption>
 </figure>
 </div>
 <p>Since the MCU cannot be simulated with made-up data in Segger and the data pipeline for the project was stunted at the beginning by the microphone, the dominant frequency detection module, note LUT, and pitch deviation modules on the MCU were unable to be tested continuously. Therefore, the performance metric of update rate on the LCD was not able to be verified. Nevertheless, it was shown that the MCU was able to display from the note LUT as shown in figure 7 below.</p>
 <p>Had the I2S microphone been able to work as expected, it is promising that the MCU functionalities would have been able to be verified since the SPI code form E155 Lab 7 Tutorial Repository was used to interface the FPGA and MCU.</p>
-<p>(Image of LCD displaying A4, 440Hz, +0 cents) Figure 7: The LCD screen can accurately display note name, pitch, and offset from the MCU LUT.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="440.png" class="img-fluid figure-img" width="600"></p>
+<figcaption>Figure 7: The LCD screen can accurately display note name, pitch, and offset from the MCU LUT.</figcaption>
+</figure>
+</div>
 <p>Results sections clearly and quantitatively outlines the key performance aspects of the design with commentary to explain the design decisions.</p>
 </section>
 <section id="bill-of-materials" class="level2">
