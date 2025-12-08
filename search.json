@@ -4,7 +4,7 @@
     "href": "resources.html",
     "title": "About the Team",
     "section": "",
-    "text": "Broderick Bownds\nBroderick Bownds is a junior engineering major at Harvey Mudd College specializing in electrical and computer engineering. He works at the intersection of hardware systems, embedded signal processing, and power electronics. His technical range spans embedded systems, digital electronics, power conversion, sensor integration, CAD-based mechanical prototyping, and computational imaging. Broderick is also committed to equitable innovation. He has redesigned neuroimaging hardware to better serve people with textured hair, mentors students in engineering fundamentals and digital design, and contributes to inclusive STEM communities through NSBE and the Annenberg Leadership Forum.\nWebsite / LinkedIn Link:\n\n\nSebastian Heredia\nSebastian Heredia is a junior engineering major at Harvey Mudd College with a strong foundation in math and a growing focus on electrical engineering, embedded systems, and robotics. He’s passionate about building hardware and systems that sense, respond, and interact with the world, thriving in fast-paced, hands-on environments where he can design, prototype, and iterate quickly. Outside of engineering, Sebastian explores visual and audio storytelling through photography, sketching, and editing—creative practices that sharpen the precision, structure, and attention to detail he brings to technical work. Whether developing embedded systems or building digital tools, he approaches engineering with both methodical rigor and creative problem-solving.\nWebsite / LinkedIn Link:"
+    "text": "Broderick Bownds\nBroderick Bownds is a junior engineering major at Harvey Mudd College specializing in electrical and computer engineering. He works at the intersection of hardware systems, embedded signal processing, and power electronics. His technical range spans embedded systems, digital electronics, power conversion, sensor integration, CAD-based mechanical prototyping, and computational imaging. Broderick is also committed to equitable innovation. He has redesigned neuroimaging hardware to better serve people with textured hair, mentors students in engineering fundamentals and digital design, and contributes to inclusive STEM communities through NSBE and the Annenberg Leadership Forum.\nWebsite / LinkedIn Link:\n\n\n\n\n\nSebastian Heredia\nSebastian Heredia is a junior engineering major at Harvey Mudd College with a strong foundation in math and a growing focus on electrical engineering, embedded systems, and robotics. He’s passionate about building hardware and systems that sense, respond, and interact with the world, thriving in fast-paced, hands-on environments where he can design, prototype, and iterate quickly. Outside of engineering, Sebastian explores visual and audio storytelling through photography, sketching, and editing—creative practices that sharpen the precision, structure, and attention to detail he brings to technical work. Whether developing embedded systems or building digital tools, he approaches engineering with both methodical rigor and creative problem-solving.\nWebsite / LinkedIn Link:"
   },
   {
     "objectID": "documentation.html",
@@ -39,21 +39,28 @@
     "href": "design.html",
     "title": "Documentation",
     "section": "",
-    "text": "(Communication protocols labeled, bus width)"
+    "text": "Figure 1: Block diagram of the entire Bit-by-Bit tuner project system."
   },
   {
     "objectID": "design.html#system-block-diagram",
     "href": "design.html#system-block-diagram",
     "title": "Documentation",
     "section": "",
-    "text": "(Communication protocols labeled, bus width)"
+    "text": "Figure 1: Block diagram of the entire Bit-by-Bit tuner project system."
   },
   {
     "objectID": "design.html#fpga-design",
     "href": "design.html#fpga-design",
     "title": "Documentation",
     "section": "FPGA Design",
-    "text": "FPGA Design\nTo implement the FFT in hardware on the FPGA, the team started by understanding the DFT algorithm in depth and consulting the paper titled by Alec and published by the HMC Dept. of Engineering.\nEach component of the FFT was designed in Lattice Radiant and adapted to be 512-point 32-bit resolution as shown in Figure 2 below. After building each component starting from the butterfly unit up to the FFT master module, each script was verified for accuracy against testbenches. Simulations involved testing cosine, square, and static input signals, ensuring that each transformed output was correct. To interface with the MCU, the SPI communication protocol was initialized at the end of the FFT data pipeline. The FPGA output on the SDO line was sent serially to the MCU.\n(RTL of fft.sv) Figure 2: RTL schematic of fft.sv.\nAfter the FFT was validated, the I2S module from the Lattice Radiant IP Block Catalogue was implemented. Since the INMP441 I2S microphone with a built-in ADC outputs 24-bit data but our FFT was configured for 32-bit resolution, sampled data was zero padded in the lower bits to achieve the required signal bit width. Additionally, the FPGA system clock of 48MHz from the instantiated HSOSC module was divided down to 3MHz for bck and 48kHz lrck output signals that were sent to the INMP441 to operationalize it. Figure 3 below shows the top level FPGA module that contains the I2S module and minimizes LUT and I/O pins.\n(RTL of fft_master.sv) Figure 3: The top level FPGA module contains blocks to interface the FFT and I2S modules."
+    "text": "FPGA Design\nTo implement the FFT in hardware on the FPGA, the team started by understanding the DFT algorithm in depth and consulting the paper titled by Alec and published by the HMC Dept. of Engineering.\nEach component of the FFT was designed in Lattice Radiant and adapted to be 512-point 32-bit resolution as shown in Figure 2 below. After building each component starting from the butterfly unit up to the FFT master module, each script was verified for accuracy against testbenches. Simulations involved testing cosine, square, and static input signals, ensuring that each transformed output was correct. To interface with the MCU, the SPI communication protocol was initialized at the end of the FFT data pipeline. The FPGA output on the SDO line was sent serially to the MCU.\n\n\n\nFigure 2: RTL schematic of fft.sv.\n\n\nAfter the FFT was validated, the I2S module from the Lattice Radiant IP Block Catalogue was implemented. Since the INMP441 I2S microphone with a built-in ADC outputs 24-bit data but our FFT was configured for 32-bit resolution, sampled data was zero padded in the lower bits to achieve the required signal bit width. Additionally, the FPGA system clock of 48MHz from the instantiated HSOSC module was divided down to 3MHz for bck and 48kHz lrck output signals that were sent to the INMP441 to operationalize it. Figure 3 below shows the top level FPGA module that contains the I2S module and minimizes LUT and I/O pins.\n\n\n\nFigure 2: Figure 3: The top level FPGA module contains blocks to interface the FFT and I2S modules."
+  },
+  {
+    "objectID": "design.html#new-hardware",
+    "href": "design.html#new-hardware",
+    "title": "Documentation",
+    "section": "New Hardware:",
+    "text": "New Hardware:\nThe primary new hardware component introduced in this project was the INMP441 digital I2S microphone shown in Figure 4 below, which represented a significant step beyond the SPI- and USART-based digital interfaces used previously in E155. Unlike these general-purpose serial protocols, I2S is specifically built for continuous, real-time audio collection, enforcing strict timing relationships between its bit clock (BCLK), left/right frame clock (LRCLK or WS), and serial data (SD) lines. These timing constraints required additional RTL modules and careful clock generation within the FPGA to ensure reliable audio sampling.\n(INMP441 MEMs MIC) Figure 4: Physical INMP441 MEMs I2S component."
   },
   {
     "objectID": "design.html#mcu-design",
@@ -88,6 +95,6 @@
     "href": "index.html#system-block-diagram",
     "title": "Project Overview",
     "section": "System Block Diagram:",
-    "text": "System Block Diagram:\nBelow, Figure 1 shows the system block diagram for the project which includes all hardware components—I2S microphone, FPGA, MCU, LCD screen—as well as the communication protocols between all components.\n(Communication protocols labeled, bus width)\nFigure 1: Block diagram of the entire Bit-by-Bit tuner project system."
+    "text": "System Block Diagram:\nBelow, Figure 1 shows the system block diagram for the project which includes all hardware components—I2S microphone, FPGA, MCU, LCD screen—as well as the communication protocols between all components.\n\n\n\nFigure 1: Block diagram of the entire Bit-by-Bit tuner project system."
   }
 ]

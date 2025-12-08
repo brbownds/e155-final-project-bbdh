@@ -119,10 +119,8 @@ ul.task-list li input[type="checkbox"] {
   <ul>
   <li><a href="#system-block-diagram" id="toc-system-block-diagram" class="nav-link active" data-scroll-target="#system-block-diagram">System Block Diagram:</a></li>
   <li><a href="#fpga-design" id="toc-fpga-design" class="nav-link" data-scroll-target="#fpga-design">FPGA Design</a></li>
-  <li><a href="#new-hardware" id="toc-new-hardware" class="nav-link" data-scroll-target="#new-hardware">New Hardware:</a>
-  <ul class="collapse">
+  <li><a href="#new-hardware" id="toc-new-hardware" class="nav-link" data-scroll-target="#new-hardware">New Hardware:</a></li>
   <li><a href="#mcu-design" id="toc-mcu-design" class="nav-link" data-scroll-target="#mcu-design">MCU Design</a></li>
-  </ul></li>
   <li><a href="#new-hardware-1" id="toc-new-hardware-1" class="nav-link" data-scroll-target="#new-hardware-1">New Hardware:</a></li>
   </ul>
 </nav>
@@ -151,24 +149,39 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="system-block-diagram" class="level2">
 <h2 class="anchored" data-anchor-id="system-block-diagram">System Block Diagram:</h2>
-<p>(Communication protocols labeled, bus width)</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Sysblock_dia.png" class="img-fluid figure-img" width="500"></p>
+<figcaption>Figure 1: Block diagram of the entire Bit-by-Bit tuner project system.</figcaption>
+</figure>
+</div>
 </section>
 <section id="fpga-design" class="level2">
 <h2 class="anchored" data-anchor-id="fpga-design">FPGA Design</h2>
 <p>To implement the FFT in hardware on the FPGA, the team started by understanding the DFT algorithm in depth and consulting the paper titled by Alec and published by the HMC Dept. of Engineering.</p>
 <p>Each component of the FFT was designed in Lattice Radiant and adapted to be 512-point 32-bit resolution as shown in Figure 2 below. After building each component starting from the butterfly unit up to the FFT master module, each script was verified for accuracy against testbenches. Simulations involved testing cosine, square, and static input signals, ensuring that each transformed output was correct. To interface with the MCU, the SPI communication protocol was initialized at the end of the FFT data pipeline. The FPGA output on the SDO line was sent serially to the MCU.</p>
-<p>(RTL of fft.sv) Figure 2: RTL schematic of fft.sv.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fft_top.png" class="img-fluid figure-img" width="500"></p>
+<figcaption>Figure 2: RTL schematic of fft.sv.</figcaption>
+</figure>
+</div>
 <p>After the FFT was validated, the I2S module from the Lattice Radiant IP Block Catalogue was implemented. Since the INMP441 I2S microphone with a built-in ADC outputs 24-bit data but our FFT was configured for 32-bit resolution, sampled data was zero padded in the lower bits to achieve the required signal bit width. Additionally, the FPGA system clock of 48MHz from the instantiated HSOSC module was divided down to 3MHz for <code>bck</code> and 48kHz <code>lrck</code> output signals that were sent to the INMP441 to operationalize it. Figure 3 below shows the top level FPGA module that contains the I2S module and minimizes LUT and I/O pins.</p>
-<p>(RTL of fft_master.sv) Figure 3: The top level FPGA module contains blocks to interface the FFT and I2S modules.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fft_master.png" class="img-fluid figure-img" width="500"></p>
+<figcaption>Figure 2: Figure 3: The top level FPGA module contains blocks to interface the FFT and I2S modules.</figcaption>
+</figure>
+</div>
 </section>
-<section id="new-hardware" class="level1">
-<h1>New Hardware:</h1>
-<p>The primary new hardware component introduced in this project was the INMP441 digital I2S microphone shown in Figure 4 below, which represented a significant step beyond the SPI- and USART-based digital interfaces used previously in E155. Unlike these general-purpose serial protocols, I2S is specifically built for continuous, real-time audio collection, enforcing strict timing relationships between its bit clock (BCLK), left/right frame clock (LRCLK or WS), and serial data (SD) lines. These timing constraints required additional RTL modules and careful clock generation within the FPGA to ensure reliable audio sampling.</p>
+<section id="new-hardware" class="level2">
+<h2 class="anchored" data-anchor-id="new-hardware">New Hardware:</h2>
+<p>The primary new hardware component introduced in this project was the <a href="https://invensense.tdk.com/wp-content/uploads/2015/02/INMP441.pdf">INMP441</a> digital I2S microphone shown in Figure 4 below, which represented a significant step beyond the SPI- and USART-based digital interfaces used previously in E155. Unlike these general-purpose serial protocols, I2S is specifically built for continuous, real-time audio collection, enforcing strict timing relationships between its bit clock (BCLK), left/right frame clock (LRCLK or WS), and serial data (SD) lines. These timing constraints required additional RTL modules and careful clock generation within the FPGA to ensure reliable audio sampling.</p>
 <p>(INMP441 MEMs MIC) Figure 4: Physical INMP441 MEMs I2S component.</p>
+</section>
 <section id="mcu-design" class="level2">
 <h2 class="anchored" data-anchor-id="mcu-design">MCU Design</h2>
 <p>For this project, the MCU served as the control and interpretation layer for an FPGA-based 512-point FFT. The FPGA performs all real-time audio sampling and FFT computation, then signals the MCU through a DONE pin when a complete frame is ready. The MCU, acting as an SPI master, asserts chip-select, cs and clocks in all 512 complex FFT bins over an 8-bit receive-only SPI link, ignoring MOSI while using MISO to collect the FPGA’s streamed FFT output. Once a frame is received, the MCU computes the magnitude of each bin, identifies the dominant frequency using the 16 kHz sampling rate and 31.25 Hz bin resolution, and converts that frequency into a musical note using a flat-only chromatic scale (A, Bb, B, C, Db, etc.) along with a logarithmic cents-deviation calculation. These results— note name, pitch in Hz, and pitch deviation in cents—are displayed on a 16×2 LCD driven in 4-bit mode using dedicated GPIO lines. After updating the display, the MCU pulses a RST line to instruct the FPGA to begin processing the next audio frame. This architecture cleanly separates the heavy DSP work to the FPGA while the MCU handles control, interpretation, and user feedback.</p>
-</section>
 </section>
 <section id="new-hardware-1" class="level1">
 <h1>New Hardware:</h1>
