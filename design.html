@@ -151,7 +151,7 @@ ul.task-list li input[type="checkbox"] {
 <h2 class="anchored" data-anchor-id="system-block-diagram">System Block Diagram:</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="Sysblock_dia.png" class="img-fluid figure-img" width="500"></p>
+<p><img src="Sysblock_dia.png" class="img-fluid figure-img" width="800"></p>
 <figcaption>Figure 1: Block diagram of the entire Bit-by-Bit tuner project system.</figcaption>
 </figure>
 </div>
@@ -162,15 +162,15 @@ ul.task-list li input[type="checkbox"] {
 <p>Each component of the FFT was designed in Lattice Radiant and adapted to be 512-point 32-bit resolution as shown in Figure 2 below. After building each component starting from the butterfly unit up to the FFT master module, each script was verified for accuracy against testbenches. Simulations involved testing cosine, square, and static input signals, ensuring that each transformed output was correct. To interface with the MCU, the SPI communication protocol was initialized at the end of the FFT data pipeline. The FPGA output on the SDO line was sent serially to the MCU.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="fft_top.png" class="img-fluid figure-img" width="500"></p>
+<p><img src="fft_top.png" class="img-fluid figure-img" width="800"></p>
 <figcaption>Figure 2: RTL schematic of fft.sv.</figcaption>
 </figure>
 </div>
 <p>After the FFT was validated, the I2S module from the Lattice Radiant IP Block Catalogue was implemented. Since the INMP441 I2S microphone with a built-in ADC outputs 24-bit data but our FFT was configured for 32-bit resolution, sampled data was zero padded in the lower bits to achieve the required signal bit width. Additionally, the FPGA system clock of 48MHz from the instantiated HSOSC module was divided down to 3MHz for <code>bck</code> and 48kHz <code>lrck</code> output signals that were sent to the INMP441 to operationalize it. Figure 3 below shows the top level FPGA module that contains the I2S module and minimizes LUT and I/O pins.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="fft_master.png" class="img-fluid figure-img" width="500"></p>
-<figcaption>Figure 2: Figure 3: The top level FPGA module contains blocks to interface the FFT and I2S modules.</figcaption>
+<p><img src="fft_master.png" class="img-fluid figure-img" width="800"></p>
+<figcaption>Figure 3: The top level FPGA module contains blocks to interface the FFT and I2S modules.</figcaption>
 </figure>
 </div>
 </section>

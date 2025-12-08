@@ -11,14 +11,14 @@
     "href": "documentation.html",
     "title": "References:",
     "section": "",
-    "text": "(KiCAD)\nThe source code for the project can be found in the associated GitHub repository."
+    "text": "Figure 4: Schematic of the entire Bit-by-Bit tuner project system from KiCAD\n\n\nThe source code for the project can be found in the associated GitHub repository."
   },
   {
     "objectID": "documentation.html#schematic",
     "href": "documentation.html#schematic",
     "title": "References:",
     "section": "",
-    "text": "(KiCAD)\nThe source code for the project can be found in the associated GitHub repository."
+    "text": "Figure 4: Schematic of the entire Bit-by-Bit tuner project system from KiCAD\n\n\nThe source code for the project can be found in the associated GitHub repository."
   },
   {
     "objectID": "documentation.html#results",
@@ -32,7 +32,7 @@
     "href": "documentation.html#bill-of-materials",
     "title": "References:",
     "section": "Bill of Materials:",
-    "text": "Bill of Materials:"
+    "text": "Bill of Materials:\n\n\n\nPart Name (Link + Website)\nDatasheet (Link)\nQuantity\nTotal Cost (Tax + Shipping)\nArrival Date\n\n\n\n\nINMP441 I2S MEMS\nINMP441\n5\n$10.94 (AliExpress)\nNovember 5–15\n\n\n2×16 I2C 1602 LCD Screen (PCF8574)\nLCD1602 (PCF8574)\n1\nStockroom (Crystal Fontz)\n-\n\n\nTotal Cost\n\n\n$15.94"
   },
   {
     "objectID": "design.html",
@@ -53,7 +53,7 @@
     "href": "design.html#fpga-design",
     "title": "Documentation",
     "section": "FPGA Design",
-    "text": "FPGA Design\nTo implement the FFT in hardware on the FPGA, the team started by understanding the DFT algorithm in depth and consulting the paper titled by Alec and published by the HMC Dept. of Engineering.\nEach component of the FFT was designed in Lattice Radiant and adapted to be 512-point 32-bit resolution as shown in Figure 2 below. After building each component starting from the butterfly unit up to the FFT master module, each script was verified for accuracy against testbenches. Simulations involved testing cosine, square, and static input signals, ensuring that each transformed output was correct. To interface with the MCU, the SPI communication protocol was initialized at the end of the FFT data pipeline. The FPGA output on the SDO line was sent serially to the MCU.\n\n\n\nFigure 2: RTL schematic of fft.sv.\n\n\nAfter the FFT was validated, the I2S module from the Lattice Radiant IP Block Catalogue was implemented. Since the INMP441 I2S microphone with a built-in ADC outputs 24-bit data but our FFT was configured for 32-bit resolution, sampled data was zero padded in the lower bits to achieve the required signal bit width. Additionally, the FPGA system clock of 48MHz from the instantiated HSOSC module was divided down to 3MHz for bck and 48kHz lrck output signals that were sent to the INMP441 to operationalize it. Figure 3 below shows the top level FPGA module that contains the I2S module and minimizes LUT and I/O pins.\n\n\n\nFigure 2: Figure 3: The top level FPGA module contains blocks to interface the FFT and I2S modules."
+    "text": "FPGA Design\nTo implement the FFT in hardware on the FPGA, the team started by understanding the DFT algorithm in depth and consulting the paper titled by Alec and published by the HMC Dept. of Engineering.\nEach component of the FFT was designed in Lattice Radiant and adapted to be 512-point 32-bit resolution as shown in Figure 2 below. After building each component starting from the butterfly unit up to the FFT master module, each script was verified for accuracy against testbenches. Simulations involved testing cosine, square, and static input signals, ensuring that each transformed output was correct. To interface with the MCU, the SPI communication protocol was initialized at the end of the FFT data pipeline. The FPGA output on the SDO line was sent serially to the MCU.\n\n\n\nFigure 2: RTL schematic of fft.sv.\n\n\nAfter the FFT was validated, the I2S module from the Lattice Radiant IP Block Catalogue was implemented. Since the INMP441 I2S microphone with a built-in ADC outputs 24-bit data but our FFT was configured for 32-bit resolution, sampled data was zero padded in the lower bits to achieve the required signal bit width. Additionally, the FPGA system clock of 48MHz from the instantiated HSOSC module was divided down to 3MHz for bck and 48kHz lrck output signals that were sent to the INMP441 to operationalize it. Figure 3 below shows the top level FPGA module that contains the I2S module and minimizes LUT and I/O pins.\n\n\n\nFigure 3: The top level FPGA module contains blocks to interface the FFT and I2S modules."
   },
   {
     "objectID": "design.html#new-hardware",
