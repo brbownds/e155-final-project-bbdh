@@ -10,7 +10,7 @@ website:
       - href: documentation.qmd
         text: Documentation
       - href: resources.qmd
-        text: Resources
+        text: About
 
 format:
   html:
