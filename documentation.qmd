@@ -1,5 +1,6 @@
 ## Schematic:
-(KiCAD)
+![Figure 4: Schematic of the entire Bit-by-Bit tuner project system from KiCAD](schematic.png){width=500}
+
 
 The source code for the project can be found in the associated [GitHub repository.](https://github.com/DylanSebastianHeredia/E155_Tuner_Project )
 
@@ -24,6 +25,11 @@ Results sections clearly and quantitatively outlines the key performance aspects
 
 
 ## Bill of Materials:
+| Part Name (Link + Website)                | Datasheet (Link)                            | Quantity | Total Cost (Tax + Shipping)                      | Arrival Date     |
+|-------------------------------------------|---------------------------------------------|----------|--------------------------------------------------|------------------|
+| INMP441 I2S MEMS                          | [INMP441](https://www.digikey.com/htmldatasheets/production/1431884/0/0/1/INMP441-Datasheet.pdf) | 5        | [$10.94](https://www.aliexpress.com/p/shoppingcart/index.html?spm=a2g0o.tesla.header.1.472d6fMJ6fMJtP) (AliExpress) | November 5–15    |
+| 2×16 I2C 1602 LCD Screen (PCF8574)        | [LCD1602 (PCF8574)](https://www.crystalfontz.com/product/cfah2002a1tmijt-20x2-character-display-module) | 1        | Stockroom (Crystal Fontz) | -       |
+| **Total Cost**                            |                                             |          | **<span style="color:red;">$15.94</span>**       |                  |
 
 
 

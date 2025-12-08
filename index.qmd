@@ -21,6 +21,6 @@ Building off the team’s love for all things musical—listening, playing, writ
 
 Below, Figure 1 shows the system block diagram for the project which includes all hardware components—I2S microphone, FPGA, MCU, LCD screen—as well as the communication protocols between all components. 
 
-![Figure 1: Block diagram of the entire Bit-by-Bit tuner project system.](Sysblock_dia.png){width=500}
+![Figure 1: Block diagram of the entire Bit-by-Bit tuner project system.](Sysblock_dia.png){width=800}
 
 
