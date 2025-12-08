@@ -12,7 +12,7 @@ To implement the FFT in hardware on the FPGA, the team started by understanding 
 
 Each component of the FFT was designed in Lattice Radiant and adapted to be 512-point 32-bit resolution as shown in Figure 2 below. After building each component starting from the butterfly unit up to the FFT master module, each script was verified for accuracy against testbenches. Simulations involved testing cosine, square, and static input signals, ensuring that each transformed output was correct. To interface with the MCU, the SPI communication protocol was initialized at the end of the FFT data pipeline. The FPGA output on the SDO line was sent serially to the MCU.
 
-![Figure 2: RTL schematic of fft.sv.](fft_top.png){width=800}
+![Figure 2: RTL schematic of fft.sv.](fft_top.png){width=1200}
 
 
 After the FFT was validated, the I2S module from the Lattice Radiant IP Block Catalogue was implemented. Since the INMP441 I2S microphone with a built-in ADC outputs 24-bit data but our FFT was configured for 32-bit resolution, sampled data was zero padded in the lower bits to achieve the required signal bit width. Additionally, the FPGA system clock of 48MHz from the instantiated HSOSC module was divided down to 3MHz for `bck` and 48kHz `lrck` output signals that were sent to the INMP441 to operationalize it. Figure 3 below shows the top level FPGA module that contains the I2S module and minimizes LUT and I/O pins. 
