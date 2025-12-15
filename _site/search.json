@@ -1,7 +1,7 @@
 [
   {
-    "objectID": "resources.html",
-    "href": "resources.html",
+    "objectID": "about.html",
+    "href": "about.html",
     "title": "About the Team",
     "section": "",
     "text": "Broderick Bownds\nBroderick Bownds is a junior engineering major at Harvey Mudd College specializing in electrical and computer engineering. He works at the intersection of hardware systems, embedded signal processing, and power electronics. His technical range spans embedded systems, digital electronics, power conversion, sensor integration, CAD-based mechanical prototyping, and computational imaging. Broderick is also committed to equitable innovation. He has redesigned neuroimaging hardware to better serve people with textured hair, mentors students in engineering fundamentals and digital design, and contributes to inclusive STEM communities through NSBE and the Annenberg Leadership Forum.\n LinkedIn  Website\n\n\n\n\n\n\n\nSebastian Heredia\nSebastian Heredia is a junior engineering major at Harvey Mudd College with a strong foundation in math and a growing focus on electrical engineering, embedded systems, and robotics. He’s passionate about building hardware and systems that sense, respond, and interact with the world, thriving in fast-paced, hands-on environments where he can design, prototype, and iterate quickly. Outside of engineering, Sebastian explores visual and audio storytelling through photography, sketching, and editing—creative practices that sharpen the precision, structure, and attention to detail he brings to technical work. Whether developing embedded systems or building digital tools, he approaches engineering with both methodical rigor and creative problem-solving.\n LinkedIn  Website"
@@ -70,13 +70,6 @@
     "text": "MCU Design\nFor this project, the MCU served as the control and interpretation layer for an FPGA-based 512-point FFT. The FPGA performs all real-time audio sampling and FFT computation, then signals the MCU through a DONE pin when a complete frame is ready. The MCU, acting as an SPI master, asserts chip-select, cs and clocks in all 512 complex FFT bins over an 8-bit receive-only SPI link, ignoring MOSI while using MISO to collect the FPGA’s streamed FFT output. Once a frame is received, the MCU computes the magnitude of each bin, identifies the dominant frequency using the 16 kHz sampling rate and 31.25 Hz bin resolution, and converts that frequency into a musical note using a flat-only chromatic scale (A, Bb, B, C, Db, etc.) along with a logarithmic cents-deviation calculation. These results— note name, pitch in Hz, and pitch deviation in cents—are displayed on a 16×2 LCD driven in 4-bit mode using dedicated GPIO lines. After updating the display, the MCU pulses a RST line to instruct the FPGA to begin processing the next audio frame. This architecture cleanly separates the heavy DSP work to the FPGA while the MCU handles control, interpretation, and user feedback."
   },
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Project Overview",
-    "section": "",
-    "text": "[Insert Images (& Video?)]"
-  },
-  {
     "objectID": "index.html#project-abstract",
     "href": "index.html#project-abstract",
     "title": "Project Overview",
@@ -96,12 +89,5 @@
     "title": "Project Overview",
     "section": "System Block Diagram:",
     "text": "System Block Diagram:\nBelow, Figure 1 shows the system block diagram for the project which includes all hardware components—I2S microphone, FPGA, MCU, LCD screen—as well as the communication protocols between all components.\n\n\n\nFigure 1: Block diagram of the entire Bit-by-Bit tuner project system."
-  },
-  {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About the Team",
-    "section": "",
-    "text": "Broderick Bownds\nBroderick Bownds is a junior engineering major at Harvey Mudd College specializing in electrical and computer engineering. He works at the intersection of hardware systems, embedded signal processing, and power electronics. His technical range spans embedded systems, digital electronics, power conversion, sensor integration, CAD-based mechanical prototyping, and computational imaging. Broderick is also committed to equitable innovation. He has redesigned neuroimaging hardware to better serve people with textured hair, mentors students in engineering fundamentals and digital design, and contributes to inclusive STEM communities through NSBE and the Annenberg Leadership Forum.\n LinkedIn  Website\n\n\n\n\n\n\n\nSebastian Heredia\nSebastian Heredia is a junior engineering major at Harvey Mudd College with a strong foundation in math and a growing focus on electrical engineering, embedded systems, and robotics. He’s passionate about building hardware and systems that sense, respond, and interact with the world, thriving in fast-paced, hands-on environments where he can design, prototype, and iterate quickly. Outside of engineering, Sebastian explores visual and audio storytelling through photography, sketching, and editing—creative practices that sharpen the precision, structure, and attention to detail he brings to technical work. Whether developing embedded systems or building digital tools, he approaches engineering with both methodical rigor and creative problem-solving.\n LinkedIn  Website"
   }
 ]

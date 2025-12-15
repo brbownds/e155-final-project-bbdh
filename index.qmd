@@ -24,3 +24,8 @@ Below, Figure 1 shows the system block diagram for the project which includes al
 ![Figure 1: Block diagram of the entire Bit-by-Bit tuner project system.](Sysblock_dia.png){width=800}
 
 
+{{< video youtube.com/watch?v=XdOuNKCr3Ak&feature=youtu.be >}}
+
+
+
+
